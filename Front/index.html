@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/pokemon-icono.ico">
+    <title>Poké Tienda Elite</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body class="modo-pokebola">
+
+    <div class="whatsapp-container">
+        <img src="images/rotomdex.png" class="rotom-helper rotom-whatsapp" alt="Rotom Ayuda">
+        <a href="https://wa.me/56912345678" class="whatsapp-btn" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        </a>
+    </div>
+
+    <div id="cart-window" class="cart-window">
+        <img src="images/rotomdex.png" class="rotom-helper rotom-cart" alt="Rotom Carrito">
+        <h3>Tu Pedido TCG</h3>
+        <ul id="cart-items"></ul>
+        <div class="cart-total">Total: $<span id="total-price">0</span></div>
+        <button class="btn-comprar" onclick="finalizarCompra()">Finalizar por WhatsApp</button>
+        <button class="btn-cerrar" onclick="toggleCart()">Cerrar</button>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <img src="images/pokemon-icono.ico" class="nav-logo" alt="Logo">
+            
+            <div class="search-bar">
+                <input type="text" id="buscador" placeholder="Buscar Pokémon..." onkeyup="filtrarCartas()">
+                <img src="images/rotomdex.png" class="rotom-helper rotom-search" alt="RotomDex">
+            </div>
+
+            <div class="nav-links">
+                <a href="#anuncios">Ofertas</a>
+                <a href="#tablero">Tablero</a>
+                <a href="#vunion">V-UNION</a>
+                <a href="#subastas">Subastas</a>
+                <a href="#base-set">Base Set</a>
+            </div>
+            <div class="nav-icons">
+                <div class="auth-links">
+                    <a href="#">Iniciar Sesión</a>
+                    <a href="#">Registrarse</a>
+                </div>
+                <div class="rocket-icon" onclick="toggleRocketMode()" style="cursor:pointer">🚀</div>
+                <div class="cart-icon" onclick="toggleCart()" style="cursor:pointer">🛒 <span id="cart-count">0</span></div>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <h1 id="store-title">PokeTienda</h1>
+    </header>
+
+    <main>
+        <section id="anuncios" class="banner-color"><h2>Ofertas y Preventas</h2></section>
+        <div class="contenedor-slider">
+            <div class="slider-anuncios" id="slider">
+                <div class="slide"><img src="images/anuncio 1.png" alt="Anuncio 1"></div>
+                <div class="slide"><img src="images/anuncio 2.png" alt="Anuncio 2"></div>
+                <div class="slide"><img src="images/anuncio 3.png" alt="Anuncio 3"></div>
+            </div>
+        </div>
+
+        <section class="banner-color"><h2>⚡ ¡SÚPER OFERTA EXCLUSIVA!</h2></section>
+        <div class="super-oferta-card item-busqueda">
+            <div class="oferta-contenido">
+                <div class="oferta-imagen">
+                    <img src="images/super_oferta_1.webp" alt="Super Oferta">
+                    <div class="etiqueta-descuento">-40% HOY</div>
+                </div>
+                <div class="oferta-texto">
+                    <h3 class="nombre-pokemon">Master Collection Premium Box</h3>
+                    <p class="oferta-descripcion">
+                        ¡El tesoro definitivo para cualquier entrenador! Este set especial incluye <strong>10 sobres de expansión</strong>, una carta promocional metálica y un estuche de transporte exclusivo.
+                    </p>
+                    <ul class="lista-beneficios">
+                        <li>⭐ Garantía de Cartas Holo aseguradas</li>
+                        <li>🚚 Envío GRATIS a todo Chile</li>
+                        <li>🎁 Regalo sorpresa por tu primera compra</li>
+                    </ul>
+                    <div class="contenedor-precios">
+                        <span class="precio-tachado">$89.990</span>
+                        <span class="precio-real">$53.990 CLP</span>
+                    </div>
+                    <button class="btn-comprar btn-oferta-animado" onclick="addToCart('Master Collection Box', 53990)">
+                        ¡APROVECHAR OFERTA AHORA!
+                    </button>
+                    <p class="stock-aviso">⏳ ¡Quedan solo 7 unidades en stock!</p>
+                </div>
+            </div>
+        </div>
+
+        <section id="tablero" class="banner-color"><h2>Producto Destacado</h2></section>
+        <div class="seccion-flexible">
+            <div class="cuadro-central item-busqueda">
+                <img src="images/tablero_pokemon_1.jpg" alt="Tablero 1">
+                <div class="texto-central">
+                    <h3 class="nombre-pokemon">Tablero Pro Championship</h3>
+                    <p class="precio">$45.990 CLP</p>
+                    <button class="btn-comprar" onclick="addToCart('Tablero Pro', 45990)">Añadir al Carrito</button>
+                </div>
+            </div>
+            <div class="cuadro-central item-busqueda">
+                <img src="images/tablero_pokemon_2.png" alt="Tablero 2">
+                <div class="texto-central">
+                    <h3 class="nombre-pokemon">Academia de Combate</h3>
+                    <p class="precio">$32.990 CLP</p>
+                    <button class="btn-comprar" onclick="addToCart('Academia de Combate', 32990)">Añadir al Carrito</button>
+                </div>
+            </div>
+            <div class="cuadro-central item-busqueda">
+                <img src="images/tablero_pokemon_3.webp" alt="Tablero 3">
+                <div class="texto-central">
+                    <h3 class="nombre-pokemon">Monopoly Pokémon</h3>
+                    <p class="precio">$38.500 CLP</p>
+                    <button class="btn-comprar" onclick="addToCart('Monopoly Pokémon', 38500)">Añadir al Carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <section id="vunion" class="banner-color"><h2>Sets Especiales V-UNION</h2></section>
+        <div class="seccion-flexible">
+            <div class="cuadro-central item-busqueda">
+                <img src="images/Set cartas v-union.jpg" alt="V-Union">
+                <div class="texto-central">
+                    <h3 class="nombre-pokemon">Set V-UNION Especial</h3>
+                    <p class="precio">$85.000 CLP</p>
+                    <button class="btn-comprar" onclick="addToCart('Set V-UNION', 85000)">Añadir al Carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <section id="subastas" class="banner-color">
+            <h2>Subastas Activas ⏳ <span id="timer-subasta" style="color: #FFD600; float: right; margin-right: 20px;">02:45:12</span></h2>
+        </section>
+        <div class="contenedor-cartas">
+            <article class="carta-box item-busqueda">
+                <div class="badge-rareza rareza-vmax">VMAX</div>
+                <h3 class="nombre-pokemon">Lote VMAX Rainbow</h3>
+                <img src="images/imag subasta 1.jpeg" alt="Subasta 1">
+                <p class="precio">$25.000 CLP</p>
+                <button class="btn-comprar" onclick="addToCart('Lote VMAX', 25000)">Pujar</button>
+            </article>
+            <article class="carta-box item-busqueda">
+                <div class="badge-rareza rareza-ex">EX Rare</div>
+                <h3 class="nombre-pokemon">Lote Mew EX</h3>
+                <img src="images/imag subasta 2.jpg" alt="Subasta 2">
+                <p class="precio">$30.000 CLP</p>
+                <button class="btn-comprar" onclick="addToCart('Lote Mew', 30000)">Pujar</button>
+            </article>
+        </div>
+
+        <section id="base-set" class="banner-color"><h2>Base Set Clásico</h2></section>
+        <div class="contenedor-cartas">
+            <article class="carta-box item-busqueda">
+                <div class="badge-rareza rareza-vintage">1st Ed</div>
+                <h3 class="nombre-pokemon">Pikachu</h3>
+                <img src="images/pikachu 1999.jpg" alt="Pikachu">
+                <p class="precio">$150.000</p>
+                <button class="btn-comprar" onclick="addToCart('Pikachu', 150000)">Comprar</button>
+            </article>
+            <article class="carta-box item-busqueda">
+                <div class="badge-rareza rareza-holo">Holo</div>
+                <h3 class="nombre-pokemon">Charizard</h3>
+                <img src="images/charizard holo.jpg" alt="Charizard">
+                <p class="precio">$500.000</p>
+                <button class="btn-comprar" onclick="addToCart('Charizard', 500000)">Comprar</button>
+            </article>
+            <article class="carta-box item-busqueda">
+                <h3 class="nombre-pokemon">Mewtwo</h3>
+                <img src="images/Mewtwo holo.jpg" alt="Mewtwo">
+                <p class="precio">$200.000</p>
+                <button class="btn-comprar" onclick="addToCart('Mewtwo', 200000)">Comprar</button>
+            </article>
+            <article class="carta-box item-busqueda">
+                <h3 class="nombre-pokemon">Alakazam</h3>
+                <img src="images/Alakazam holo.jpg" alt="Alakazam">
+                <p class="precio">$180.000</p>
+                <button class="btn-comprar" onclick="addToCart('Alakazam', 180000)">Comprar</button>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer-oficial">
+        <div class="footer-top">
+            <h3>¡Regístrate para recibir correos electrónicos de Pokémon!</h3>
+            <div class="footer-form">
+                <input type="email" placeholder="Correo electrónico">
+                <button>Registrarse</button>
+            </div>
+        </div>
+        <div class="footer-main">
+            <div class="footer-col">
+                <h4>The Pokémon Company</h4>
+                <ul>
+                    <li><a href="#">Novedades</a></li>
+                    <li><a href="#">Servicio al cliente</a></li>
+                    <li><a href="#">Sobre nuestra compañía</a></li>
+                </ul>
+            </div>
+            <div class="legal-block">
+                <p>©2026 Poké Tienda Elite.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let tiempoRestante = 9912; 
+        function actualizarReloj() {
+            let horas = Math.floor(tiempoRestante / 3600);
+            let minutos = Math.floor((tiempoRestante % 3600) / 60);
+            let segundos = tiempoRestante % 60;
+            document.getElementById('timer-subasta').innerText = 
+                (horas < 10 ? "0" + horas : horas) + ":" + 
+                (minutos < 10 ? "0" + minutos : minutos) + ":" + 
+                (segundos < 10 ? "0" + segundos : segundos);
+            if (tiempoRestante > 0) tiempoRestante--;
+        }
+        setInterval(actualizarReloj, 1000);
+
+        function toggleRocketMode() {
+            document.body.classList.toggle('modo-rocket');
+            let titulo = document.getElementById('store-title');
+            titulo.innerText = document.body.classList.contains('modo-rocket') ? "Guarida Team Rocket" : "Poké Tienda Elite";
+        }
+        function filtrarCartas() {
+            let input = document.getElementById('buscador').value.toLowerCase();
+            let items = document.getElementsByClassName('item-busqueda');
+            for (let item of items) {
+                let nombre = item.querySelector('.nombre-pokemon').innerText.toLowerCase();
+                item.style.display = nombre.includes(input) ? "block" : "none";
+            }
+        }
+        let cart = []; let total = 0;
+        function addToCart(n, p) {
+            cart.push({n, p}); total += p;
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('total-price').innerText = total.toLocaleString('es-CL');
+            document.getElementById('cart-items').innerHTML = cart.map(i => `<li>${i.n} - $${i.p.toLocaleString('es-CL')}</li>`).join('');
+            document.getElementById('cart-window').classList.add('active');
+        }
+        function toggleCart() { document.getElementById('cart-window').classList.toggle('active'); }
+        function finalizarCompra() {
+            if(cart.length === 0) return alert("El carrito está vacío");
+            let msg = "Hola! Quiero comprar: " + cart.map(i => i.n).join(", ");
+            window.open("https://wa.me/56912345678?text=" + encodeURIComponent(msg));
+        }
+        let counter = 0;
+        setInterval(() => {
+            const s = document.getElementById('slider');
+            if(s) { counter = (counter + 1) % 3; s.style.transform = `translateX(-${counter * 33.33}%)`; }
+        }, 5000);
+    </script>
+</body>
+</html>
